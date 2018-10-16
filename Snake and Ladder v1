@@ -1,0 +1,188 @@
+import random
+
+list=[]
+
+for x in range(48):
+    list.append(x+2)  
+    
+#print(list)
+
+for x in range(48):
+    temp=list[x]    
+    randomx=random.randint(0,47)    
+    list[x]= list[randomx]    
+    list[randomx]=temp
+    
+#print(list)
+
+
+players_life = 3
+players_pos = 1
+players_choice = 0
+apple1=list[0]
+apple2=list[1] 
+sword1=list[2]
+sword2=list[3]
+snake_1=list[4]
+snake_2=list[5]
+snake_3=list[6]
+lad_1=list[7]
+lad_2=list[8]
+lad_3=list[9]
+lad_4=list[10]
+
+sword=0
+eqpdsword=0
+equip=0
+while (players_life > 0 and players_pos <50) or players_pos < 1 :
+    
+    players_choice = int(input("1. Roll Dice, 2. Items, 3. Quit \n"))
+    
+    
+    if players_choice == 1:
+        players_pos += random.randint(1,6)
+        print ("Player's Position:" , players_pos, 'Life:' , players_life)
+        
+    elif players_choice == 2:
+        print('Sword:', sword)
+        
+        if sword > 0:
+           equip = int(input("Type 0 to do nothing or type 1 to equip sword"))
+           
+           if equip == 0:
+               print('You did not equip the sword')
+                       
+           elif equip ==1:
+               eqpdsword +=1
+               print(' You equipped a sword')
+               sword -= sword
+                       
+           else:
+               print('Invalid')
+                       
+                       
+            
+
+    elif players_choice == 3:
+        print('Quitting')
+        exit()
+        
+    else:
+        print('Invalid Input')
+#Snake Encounter       
+    if players_pos == snake_1 or players_pos == snake_2 or players_pos == snake_3:
+        
+       
+       if  players_pos == snake_1:
+           if eqpdsword >= 1:
+               print('You found a snake but defeated it with your equipped sword')
+               players_pos = players_pos
+               eqpdsword -= 1
+               
+               print ("Player's Position:", players_pos,'Life:' , players_life)
+               
+           elif eqpdsword == 0:
+               players_pos = players_pos - 3
+               players_life = players_life - 1
+               print ('you were bitten by a snake and sent back 3 steps')
+               print ("Player's Position:", players_pos, 'Life:' , players_life)
+               
+
+
+       elif players_pos == snake_2:
+           
+           if eqpdsword >= 1:
+                print('You found a snake but defeated it with your equipped sword')
+                players_pos = players_pos
+                eqpdsword -= 1
+                
+                print ("Player's Position:", players_pos,'Life:' , players_life)
+                
+           elif eqpdsword == 0:
+               players_pos = players_pos - 5
+               players_life = players_life - 1
+               print ('you were bitten by a snake and sent back 5 steps')
+               print ("Player's Position:", players_pos, 'Life:' , players_life)
+               
+
+       elif players_pos == snake_3:
+           
+           if eqpdsword >= 1:
+               print('You found a snake but defeated it with your equipped sword')
+               players_pos = player_pos
+               eqpdsword -= 1
+               
+               print ("Player's Position:", players_pos,'Life:' , players_life)
+               
+           elif eqpdsword ==0:
+               players_pos = players_pos - 7
+               players_life = players_life - 1
+               print ('you were bitten by a snake and sent back 7 steps')
+               print ("Player's Position:", players_pos,'Life:' , players_life)
+               
+#End of Snake Encounter
+
+#Start of Ladders
+           
+    if players_pos == lad_1 or players_pos == lad_2 or players_pos == lad_3 or players_pos == lad_4:
+
+        if players_pos == lad_1:
+            players_pos += 2
+            print (' you found a ladder and advanced 2 steps')
+            print ("Player's Position:", players_pos)
+            
+        elif players_pos == lad_2:
+            players_pos += 4
+            print (' you found a ladder and advanced 4 steps')
+            print ("Player's Position:", players_pos)
+            
+        elif players_pos == lad_3:
+            players_pos += 6
+            print (' you found a ladder and advanced 6 steps')
+            print ("Player's Position:", players_pos)
+            
+        elif players_pos == lad_4:
+            players_pos +=7
+            print (' you found a ladder and advance 7 steps')
+            print ("Player's Position:", players_pos)
+            
+#End of Ladders
+            
+    if players_pos == apple1 or players_pos == apple2 or players_pos == sword1 or players_pos == sword2:
+        if players_pos == apple1:
+            players_life += 1
+            print('You found an apple, plus 1 to your life')
+            print('Life:', players_life)
+            apple1 = 0
+                  
+        elif players_pos == apple2:
+            players_life += 1
+            print('You found an apple, plus 1 to your life')
+            print('Life:', players_life)
+            apple2= 0
+        elif players_pos == sword1:
+            sword +=1
+            print('You found a sword')
+            sword1 = 0
+        elif players_pos == sword2:
+            sword +=1
+            print('You found a sword')
+            sword2 =0
+
+        
+        
+       
+
+
+#Start of item encounters
+            
+        
+    
+
+if players_pos >= 50:
+    
+    print('Congrats you have reached the end')
+    
+elif players_life == 0:
+    
+    print ('You died')
