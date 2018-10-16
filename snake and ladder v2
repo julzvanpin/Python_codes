@@ -1,0 +1,136 @@
+import random
+player_pos = 1
+player_heart = 3
+sword_equip = 0
+sword_inventory =0
+#spawns
+w_board=1
+i=0
+board_list = []
+
+while w_board<51:
+   board_list.append(w_board)
+   w_board+=1
+
+while i < len(board_list):
+    x= random.randint(0,49) 
+    board_list[i],board_list[x]= board_list[x],board_list[i]
+    i+=1
+#print(board_list) FOR PROOF ONLY
+snakea = board_list[1]
+snakeb = board_list[2]
+snakec = board_list[3]
+
+
+laddera = board_list[4]
+ladderb = board_list[5]
+ladderc = board_list[6]
+ladderd = board_list[7]
+
+applea = board_list[8]
+appleb = board_list [9]
+
+sworda= board_list [10]
+swordb= board_list [11]
+
+print( 'SNAKE SPAWN POSITIONS', snakea,snakeb,snakec)
+print( 'LADDER SPAWN POSITIONS', laddera,ladderb,ladderc,ladderd)
+print( 'APPLE SPAWN POSITIONS', applea, appleb)
+print( 'SWORD SPAWN POSITIONS', sworda, swordb)
+
+
+#roll dice mode choices
+while player_pos <= 49 and player_heart>0:
+    print ('lives:', player_heart)
+    print ('player position', player_pos)
+    choice = input('press a = roll dice // b = view items // c = exit ')
+    print('       ')
+    
+   
+    if choice in ['a']:
+        roll_dice = random.randint(1,6)
+        player_pos = player_pos + roll_dice
+        print('you rolled',roll_dice,'player postion at square',player_pos)
+        if player_pos == snakea:
+            if sword_equip > 0:
+                print('You encountered a snake! You killed it with a sword!')
+                sword_equip = sword_equip-1
+            else:
+               player_pos = player_pos - 3
+               print('You encountered a corn snake! 3 steps backwards!')
+               player_heart = player_heart-1
+            
+        elif player_pos == snakeb:
+           if sword_equip > 0:
+               print('You encountered a snake! you killed it with a sword!')
+               sword_equip = sword_equip-1
+           else:
+               player_pos = player_pos - 5
+               print('You encountered a python snake! 5 steps backwards!')
+               player_heart = player_heart-1
+            
+        elif player_pos == snakec:
+           if sword_equip >0:
+               print('You encountered a snake! you killed it with a sword!')
+               sword_equip = sword_equip -1
+           else:
+               player_pos = player_pos - 7
+               print('You encountered an anaconda snake! 7 steps backwards!')
+               player_heart = player_heart-1
+            
+        elif player_pos == laddera:
+            player_pos = player_pos + 2
+            print('You found a very small ladder! advance 2 steps forward!')
+            
+            
+        elif player_pos == ladderb:
+            player_pos = player_pos + 4
+            print('You found a small ladder! advance 4 steps forward!')
+            
+            
+        elif player_pos == ladderc:
+            player_pos = player_pos + 6
+            print('You found a medium ladder! advance 6 steps forward!')
+                  
+        elif player_pos == ladderd:
+            player_pos = player_pos + 7
+            print('You found a big ladder! advance 7 steps forward!')
+
+        elif player_pos == applea:
+            print('You found a treasure chest! Apple was obtained!')
+            player_heart = player_heart + 1
+
+        elif player_pos == appleb:
+            print('You found a treasure chest! Apple was obtained!')
+            player_heart = player_heart + 1
+
+        elif player_pos == sworda:
+            print('You found a treasure chest! Sword was obtained!')
+            sword_inventory = sword_inventory + 1
+
+        elif player_pos == swordb:
+            print('You found a treasure chest!  Sword was obtained!')
+            sword_inventory = sword_inventory + 1
+      
+    elif choice in ['b']:
+        print ('INVENTORY')
+        print ('1.)',sword_inventory,' # swords')
+        choice1 = input('press 1 = sword equip // 2 = cancel')
+        if choice1 in ['1']:
+           sword_equip = sword_equip+1
+           sword_inventory = sword_inventory-1
+           print ('sword was equiped')
+           print (' ')
+    elif choice in ['c']:
+        print ('wtf quitter')
+        quit()
+    else:
+        
+        print('invalid')
+
+
+        
+if player_heart<=0 and player_pos<0:
+    print('GAME OVER! PLAYER DEFEATED! ')
+else:
+    print('congrats')
